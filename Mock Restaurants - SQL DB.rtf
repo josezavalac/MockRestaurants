@@ -1,0 +1,880 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf460
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww12180\viewh13820\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf0 \CocoaLigature0 sqlite> .open Mock_Restaurants_Sales.db\
+sqlite> .tables\
+Items\
+sqlite> SELECT * FROM Items;\
+BWL|Bowl|6.8\
+BWL_PR|Bowl_Premium|8.05\
+PL|Plate|8.3\
+PL_PR|Plate_Premium|9.55\
+sqlite> .mode columns\
+sqlite> .header on\
+sqlite> SELECT * FROM Items;\
+Abbreviation  Name        Price     \
+------------  ----------  ----------\
+BWL           Bowl        6.8       \
+BWL_PR        Bowl_Premi  8.05      \
+PL            Plate       8.3       \
+PL_PR         Plate_Prem  9.55      \
+sqlite> PRAGMA table_info([Items]);\
+cid         name          type        notnull     dflt_value  pk        \
+----------  ------------  ----------  ----------  ----------  ----------\
+0           Abbreviation  TEXT        0                       0         \
+1           Name          TEXT        0                       0         \
+2           Price         INTEGER     0                       0         \
+sqlite> .schema items\
+CREATE TABLE Items (Abbreviation TEXT, Name TEXT, Price INTEGER);\
+sqlite> .width 12 11 \
+sqlite> SELECT * FROM Items;\
+Abbreviation  Name         Price     \
+------------  -----------  ----------\
+BWL           Bowl         6.8       \
+BWL_PR        Bowl_Premiu  8.05      \
+PL            Plate        8.3       \
+PL_PR         Plate_Premi  9.55      \
+sqlite> .width 12 13\
+sqlite> SELECT * FROM Items;\
+Abbreviation  Name           Price     \
+------------  -------------  ----------\
+BWL           Bowl           6.8       \
+BWL_PR        Bowl_Premium   8.05      \
+PL            Plate          8.3       \
+PL_PR         Plate_Premium  9.55      \
+sqlite> \
+sqlite> \
+sqlite> /*------------------------------------*/\
+sqlite> \
+sqlite> \
+sqlite> /*Now we create 2018 and 2019 tables with data for the four items*/ \
+sqlite> \
+sqlite> CREATE TABLE BWL_2018_Sales_Data (Year INTEGER, Period INTEGER, Name TEXT, Transactions INTEGER, Price INTEGER, Consumer_spend INTEGER);\
+\
+sqlite> \
+sqlite> INSERT INTO BWL_2018_Sales_Data VALUES (2018, 1, "BWL", 8934, 6.80, 60751.20), (2018, 2, "BWL", 7998, 6.80, 54386.40), (2018, 3, "BWL", 7568, 6.80, 51462.40), (2018, 4, "BWL", 6879, 6.80, 46777.20), (2018, 5, "BWL", 7821, 6.80, 53182.80), (2018, 6, "BWL", 8324, 6.80, 56603.20), (2018, 7, "BWL", 8478, 6.80, 57650.40), (2018, 8, "BWL", 8814, 6.80, 59935.20), (2018, 9, "BWL", 8631, 6.80, 58690.80), (2018, 10, "BWL", 7998, 6.80, 54386.40), (2018, 11, "BWL", 8213, 6.80, 55848.40), (2018, 12, "BWL", 9032, 6.80, 61417.60), (2018, 13, "BWL", 9213, 6.80, 62648.40);\
+sqlite> \
+sqlite> SELECT * FROM BWL_2018_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2018          1              BWL         8934          6.8         60751.2       \
+2018          2              BWL         7998          6.8         54386.4       \
+2018          3              BWL         7568          6.8         51462.4       \
+2018          4              BWL         6879          6.8         46777.2       \
+2018          5              BWL         7821          6.8         53182.8       \
+2018          6              BWL         8324          6.8         56603.2       \
+2018          7              BWL         8478          6.8         57650.4       \
+2018          8              BWL         8814          6.8         59935.2       \
+2018          9              BWL         8631          6.8         58690.8       \
+2018          10             BWL         7998          6.8         54386.4       \
+2018          11             BWL         8213          6.8         55848.4       \
+2018          12             BWL         9032          6.8         61417.6       \
+2018          13             BWL         9213          6.8         62648.4       \
+sqlite> \
+sqlite> /*The rest, just like excel, is copy and paste - making adjustments as we go*/ \
+sqlite> \
+sqlite> \
+sqlite> /*-------------------------------------*/\
+sqlite> \
+sqlite> \
+sqlite> CREATE TABLE BWL_2019_Sales_Data (Year INTEGER, Period INTEGER, Name TEXT, Transactions INTEGER, Price INTEGER, Consumer_spend INTEGER);\
+\
+sqlite> \
+sqlite> INSERT INTO BWL_2019_Sales_Data VALUES (2019, 1, "BWL", 9724, 6.80, 66123.20), (2019, 2, "BWL", 8132, 6.80, 55297.60), (2019, 3, "BWL", 7981, 6.80, 54270.80), (2019, 4, "BWL", 6894, 6.80, 46879.20), (2019, 5, "BWL", 8345, 6.80, 56746.00), (2019, 6, "BWL", 8678, 6.80, 59010.40), (2019, 7, "BWL", 8245, 6.80, 56066.00), (2019, 8, "BWL", 9199, 6.80, 62553.20), (2019, 9, "BWL", 8832, 6.80, 60057.60), (2019, 10, "BWL", 8375, 6.80, 56950.00), (2019, 11, "BWL", 8627, 6.80, 58663.60), (2019, 12, "BWL", 9450, 6.80, 64260.00), (2019, 13, "BWL", 9678, 6.80, 65810.40);\
+sqlite> \
+sqlite> SELCT * FROM BWL_2019_Sales_Data;\
+Error: near "SELCT": syntax error\
+sqlite> SELECT * FROM BWL_2019_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2019          1              BWL         9724          6.8         66123.2       \
+2019          2              BWL         8132          6.8         55297.6       \
+2019          3              BWL         7981          6.8         54270.8       \
+2019          4              BWL         6894          6.8         46879.2       \
+2019          5              BWL         8345          6.8         56746         \
+2019          6              BWL         8678          6.8         59010.4       \
+2019          7              BWL         8245          6.8         56066         \
+2019          8              BWL         9199          6.8         62553.2       \
+2019          9              BWL         8832          6.8         60057.6       \
+2019          10             BWL         8375          6.8         56950         \
+2019          11             BWL         8627          6.8         58663.6       \
+2019          12             BWL         9450          6.8         64260         \
+2019          13             BWL         9678          6.8         65810.4       \
+sqlite> \
+sqlite> \
+sqlite> /*-------------------------------------*/\
+sqlite> \
+sqlite> \
+sqlite> CREATE TABLE BWL_PR_2018_Sales_Data (Year INTEGER, Period INTEGER, Name TEXT, Transactions INTEGER, Price INTEGER, Consumer_spend INTEGER);\
+\
+sqlite> \
+sqlite> INSERT INTO BWL_PR_2018_Sales_Data VALUES (2018, 1, "BWL", 6893, 6.80, 55488.65), (2018, 2, "BWL", 6781, 6.80, 54587.05), (2018, 3, "BWL", 6982, 6.80, 56205.10), (2018, 4, "BWL", 5921, 6.80, 47664.05), (2018, 5, "BWL", 6104, 6.80, 49137.20), (2018, 6, "BWL", 7103, 6.80, 57179.15), (2018, 7, "BWL", 7293, 6.80, 58708.65), (2018, 8, "BWL", 7673, 6.80, 61767.65), (2018, 9, "BWL", 7132, 6.80, 57412.60), (2018, 10, "BWL", 6905, 6.80, 55585.25), (2018, 11, "BWL", 7434, 6.80, 59842.70), (2018, 12, "BWL", 7521, 6.80, 60544.05), (2018, 13, "BWL", 7741, 6.80, 62315.05);\
+sqlite> \
+sqlite> /*Adjust the transactions and consumer_spend manually, but use UPDATE query for name and price*/\
+sqlite> \
+sqlite> UPDATE BWL_PR_2018_Sales_Data SET Name = "BWL_PR" WHERE Year = 2018;\
+sqlite> UPDATE BWL_PR_2018_Sales_Data SET Price = 8.05 WHERE Name = "BWL_PR";\
+sqlite> \
+sqlite> SELCT * FROM BWL_PR_2018_Sales_Data;\
+Error: near "SELCT": syntax error\
+sqlite> SELECT * FROM BWL_PR_2018_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2018          1              BWL_PR      6893          8.05        55488.65      \
+2018          2              BWL_PR      6781          8.05        54587.05      \
+2018          3              BWL_PR      6982          8.05        56205.1       \
+2018          4              BWL_PR      5921          8.05        47664.05      \
+2018          5              BWL_PR      6104          8.05        49137.2       \
+2018          6              BWL_PR      7103          8.05        57179.15      \
+2018          7              BWL_PR      7293          8.05        58708.65      \
+2018          8              BWL_PR      7673          8.05        61767.65      \
+2018          9              BWL_PR      7132          8.05        57412.6       \
+2018          10             BWL_PR      6905          8.05        55585.25      \
+2018          11             BWL_PR      7434          8.05        59842.7       \
+2018          12             BWL_PR      7521          8.05        60544.05      \
+2018          13             BWL_PR      7741          8.05        62315.05      \
+sqlite> \
+sqlite> \
+sqlite> /*-------------------------------------------*/\
+sqlite> \
+sqlite> CREATE TABLE BWL_PR_2019_Sales_Data (Year INTEGER, Period INTEGER, Name TEXT, Transactions INTEGER, Price INTEGER, Consumer_spend INTEGER);\
+\
+sqlite> \
+sqlite> INSERT INTO BWL_PR_2019_Sales_Data VALUES (2019, 1, "BWL", 6231, 6.80, 50159.55), (2019, 2, "BWL", 6309, 6.80, 50787.45), (2019, 3, "BWL", 6631, 6.80, 53379.55), (2019, 4, "BWL", 5692, 6.80, 45820.60), (2019, 5, "BWL", 5870, 6.80, 47253.50), (2019, 6, "BWL", 6721, 6.80, 54104.05), (2019, 7, "BWL", 6892, 6.80, 55480.60), (2019, 8, "BWL", 7011, 6.80, 56438.55), (2019, 9, "BWL", 6521, 6.80, 52494.05), (2019, 10, "BWL", 6090, 6.80, 49024.50), (2019, 11, "BWL", 6821, 6.80, 54909.05), (2019, 12, "BWL", 6831, 6.80, 54989.55), (2019, 13, "BWL", 6902, 6.80, 55561.10);\
+sqlite> \
+sqlite> UPDATE BWL_PR_2019_Sales_Data SET Name = "BWL_PR" WHERE Year = 2019;\
+sqlite> UPDATE BWL_PR_2019_Sales_Data SET Price = 8.05 WHERE Name = "BWL_PR";\
+sqlite> \
+sqlite> SELECT * FROM BWL_PR_2019_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2019          1              BWL_PR      6231          8.05        50159.55      \
+2019          2              BWL_PR      6309          8.05        50787.45      \
+2019          3              BWL_PR      6631          8.05        53379.55      \
+2019          4              BWL_PR      5692          8.05        45820.6       \
+2019          5              BWL_PR      5870          8.05        47253.5       \
+2019          6              BWL_PR      6721          8.05        54104.05      \
+2019          7              BWL_PR      6892          8.05        55480.6       \
+2019          8              BWL_PR      7011          8.05        56438.55      \
+2019          9              BWL_PR      6521          8.05        52494.05      \
+2019          10             BWL_PR      6090          8.05        49024.5       \
+2019          11             BWL_PR      6821          8.05        54909.05      \
+2019          12             BWL_PR      6831          8.05        54989.55      \
+2019          13             BWL_PR      6902          8.05        55561.1       \
+sqlite> \
+sqlite> \
+sqlite> /*-------------------------------------------*/\
+sqlite> \
+sqlite> \
+sqlite> CREATE TABLE PL_2018_Sales_Data (Year INTEGER, Period INTEGER, Name TEXT, Transact\
+ions INTEGER, Price INTEGER, Consumer_spend INTEGER);\
+sqlite> \
+sqlite> INSERT INTO PL_2018_Sales_Data VALUES (2018, 1, "BWL", 12435, 6.80, 103210.50), (2\
+018, 2, "BWL", 11345, 6.80, 94163.50), (2018, 3, "BWL", 11750, 6.80, 97525.00), (2018, 4,\
+"BWL", 10993, 6.80, 91241.90), (2018, 5, "BWL", 11032, 6.80, 91565.60), (2018, 6, "BWL", 11783, 6.80, 97798.90), (2018, 7, "BWL", 11236, 6.80, 93258.80), (2018, 8, "BWL", 11895, 6.\
+80, 98728.50), (2018, 9, "BWL", 11548, 6.80, 95848.40), (2018, 10, "BWL", 12032, 6.80, 99865.60), (2018, 11, "BWL", 12439, 6.80, 103243.70), (2018, 12, "BWL", 12480, 6.80, 103584.00), (2018, 13, "BWL", 12592, 6.80, 104513.60);\
+sqlite> \
+sqlite> UPDATE PL_2018_Sales_Data SET Name = "PL" WHERE Year = 2018;\
+sqlite> UPDATE PL_2018_Sales_Data SET Price = 8.30 WHERE Name = "PL";\
+sqlite> \
+sqlite> SELECT * FROM PL_2018_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2018          1              PL          12435         8.3         103210.5      \
+2018          2              PL          11345         8.3         94163.5       \
+2018          3              PL          11750         8.3         97525         \
+2018          4              PL          10993         8.3         91241.9       \
+2018          5              PL          11032         8.3         91565.6       \
+2018          6              PL          11783         8.3         97798.9       \
+2018          7              PL          11236         8.3         93258.8       \
+2018          8              PL          11895         8.3         98728.5       \
+2018          9              PL          11548         8.3         95848.4       \
+2018          10             PL          12032         8.3         99865.6       \
+2018          11             PL          12439         8.3         103243.7      \
+2018          12             PL          12480         8.3         103584        \
+2018          13             PL          12592         8.3         104513.6      \
+sqlite> \
+sqlite> \
+sqlite> /*-------------------------------------------*/\
+sqlite> \
+sqlite> \
+sqlite> CREATE TABLE PL_2019_Sales_Data (Year INTEGER, Period INTEGER, Name TEXT, Transactions INTEGER, Price INTEGER, Consumer_spend INTEGER);\
+sqlite> \
+sqlite> INSERT INTO PL_2019_Sales_Data VALUES (2019, 1, "BWL", 14092, 6.80, 116963.60), (2\
+019, 2, "BWL", 13450, 6.80, 111635.00), (2019, 3, "BWL", 13290, 6.80, 110307.00), (2019, 4\
+, "BWL", 12679, 6.80, 105235.70), (2019, 5, "BWL", 12090, 6.80, 100347.00), (2019, 6, "BWL\
+", 12345, 6.80, 102463.50), (2019, 7, "BWL", 12654, 6.80, 105028.20), (2019, 8, "BWL", 13203, 6.80, 109584.90), (2019, 9, "BWL", 13021, 6.80, 108074.30), (2019, 10, "BWL", 13780, 6.80, 114374.00), (2019, 11, "BWL", 13989, 6.80, 116108.70), (2019, 12, "BWL", 13873, 6.80 \
+ 116216.60)sqlite> INSERT INTO PL_2019_Sales_Data VALUES (2019, 1, "BWL", 14092, 6.80, 116019, 2, "BWL", 13450, 6.80, 111635.00), (2019, 3, "BWL", 13290, 6.80, 110307.00), (2019, 4, "BWL", 12679, 6.80, 105235.70), (2019, 5, "BWL", 12090, 6.80, 100347.00), (2019, 6, "BWL", 12345, 6.80, 102463.50), (2019, 7, "BWL", 12654, 6.80, 105028.20), (2019, 8, "BWL", 13203, 6.80, 109584.90), (2019, 9, "BWL", 13021, 6.80, 108074.30), (2019, 10, "BWL", 13780, 6.80, 114374.00), (2019, 11, "BWL", 13989, 6.80, 116108.70), (2019, 12, "BWL", 13873, 6.80, 115145.90), (2019, 13, "BWL", 14002, 6.80, 116216.60);\
+sqlite> \
+sqlite> UPDATE PL_2019_Sales_Data SET Name = "PL" WHERE Year = 2019;\
+sqlite> UPDATE PL_2019_Sales_Data SET Price = 8.30 WHERE Name = "PL";\
+sqlite> \
+sqlite> SELECT * FROM PL_2019_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2019          1              PL          14092         8.3         116963.6      \
+2019          2              PL          13450         8.3         111635        \
+2019          3              PL          13290         8.3         110307        \
+2019          4              PL          12679         8.3         105235.7      \
+2019          5              PL          12090         8.3         100347        \
+2019          6              PL          12345         8.3         102463.5      \
+2019          7              PL          12654         8.3         105028.2      \
+2019          8              PL          13203         8.3         109584.9      \
+2019          9              PL          13021         8.3         108074.3      \
+2019          10             PL          13780         8.3         114374        \
+2019          11             PL          13989         8.3         116108.7      \
+2019          12             PL          13873         8.3         115145.9      \
+2019          13             PL          14002         8.3         116216.6      \
+sqlite> \
+sqlite> \
+sqlite> /*----------------------------------------------*/\
+sqlite> \
+sqlite> \
+sqlite> CREATE TABLE PL_PR_2018_Sales_Data (Year INTEGER, Period INTEGER, Name TEXT, Transactions INTEGER, Price INTEGER, Consumer_spend INTEGER);\
+sqlite> \
+sqlite> INSERT INTO PL_PR_2018_Sales_Data VALUES (2018, 1, "BWL", 9832, 6.80, 93895.60), (\
+2018, 2, "BWL", 8302, 6.80, 79284.10), (2018, 3, "BWL", 8752, 6.80, 83581.60), (2018, 4, "\
+BWL", 8369, 6.80, 79923.95), (2018, 5, "BWL", 8901, 6.80, 85004.55), (2018, 6, "BWL", 9025, 6.80, 86188.75), (2018, 7, "BWL", 9130, 6.80, 87191.50), (2018, 8, "BWL", 8968, 6.80, 85644.40), (2018, 9, "BWL", 9102, 6.80, 86924.10), (2018, 10, "BWL", 9542, 6.80, 91126.10),\
+(2018, 11, "BWL", 9620, 6.80, 91871.00), (2018, 12, "BWL", 9678, 6.80, 92424.90), (2018, 1\
+3, "BWL", 10032, 6.80, 95805.60);\
+sqlite> \
+sqlite> UPDATE PL_PR_2018_Sales_Data SET Name = "PL_PR" WHERE Year = 2018;\
+sqlite> UPDATE PL_PR_2018_Sales_Data SET Price = 9.55 WHERE Name = "PL_PR";\
+sqlite> \
+sqlite> SELECT * FROM PL_PR_2018_Sales_Data; \
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2018          1              PL_PR       9832          9.55        93895.6       \
+2018          2              PL_PR       8302          9.55        79284.1       \
+2018          3              PL_PR       8752          9.55        83581.6       \
+2018          4              PL_PR       8369          9.55        79923.95      \
+2018          5              PL_PR       8901          9.55        85004.55      \
+2018          6              PL_PR       9025          9.55        86188.75      \
+2018          7              PL_PR       9130          9.55        87191.5       \
+2018          8              PL_PR       8968          9.55        85644.4       \
+2018          9              PL_PR       9102          9.55        86924.1       \
+2018          10             PL_PR       9542          9.55        91126.1       \
+2018          11             PL_PR       9620          9.55        91871         \
+2018          12             PL_PR       9678          9.55        92424.9       \
+2018          13             PL_PR       10032         9.55        95805.6       \
+sqlite> \
+sqlite> \
+sqlite> /*-----------------------------------------------*/\
+sqlite> \
+sqlite> \
+sqlite> CREATE TABLE PL_PR_2019_Sales_Data (Year INTEGER, Period INTEGER, Name TEXT, Transactions INTEGER, Price INTEGER, Consumer_spend INTEGER);\
+sqlite> \
+sqlite> INSERT INTO PL_PR_2019_Sales_Data VALUES (2019, 1, "BWL", 10126, 6.80, 96703.30),\
+(2019, 2, "BWL", 8803, 6.80, 84068.65), (2019, 3, "BWL", 8892, 6.80, 84918.60), (2019, 4,\
+"BWL", 8679, 6.80, 82884.45), (2019, 5, "BWL", 8890, 6.80, 84899.50), (2019, 6, "BWL", 8735, 6.80, 83419.25), (2019, 7, "BWL", 9342, 6.80, 89216.10), (2019, 8, "BWL", 9579, 6.80, 91479.45), (2019, 9, "BWL", 9674, 6.80, 92386.70), (2019, 10, "BWL", 9879, 6.80, 94344.45), (2019, 11, "BWL", 9904, 6.80, 94583.20), (2019, 12, "BWL", 9964, 6.80, 95156.20), (2019,\
+13, "BWL", 10245, 6.80, 97839.75);\
+sqlite> \
+sqlite> UPDATE PL_PR_2019_Sales_Data SET Name = "PL_PR" WHERE Year = 2019;\
+sqlite> UPDATE PL_PR_2019_Sales_Data SET Price = 9.55 WHERE Name = "PL_PR";\
+sqlite> \
+sqlite> SELECT * FROM PL_PR_2019_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2019          1              PL_PR       10126         9.55        96703.3       \
+2019          2              PL_PR       8803          9.55        84068.65      \
+2019          3              PL_PR       8892          9.55        84918.6       \
+2019          4              PL_PR       8679          9.55        82884.45      \
+2019          5              PL_PR       8890          9.55        84899.5       \
+2019          6              PL_PR       8735          9.55        83419.25      \
+2019          7              PL_PR       9342          9.55        89216.1       \
+2019          8              PL_PR       9579          9.55        91479.45      \
+2019          9              PL_PR       9674          9.55        92386.7       \
+2019          10             PL_PR       9879          9.55        94344.45      \
+2019          11             PL_PR       9904          9.55        94583.2       \
+2019          12             PL_PR       9964          9.55        95156.2       \
+2019          13             PL_PR       10245         9.55        97839.75      \
+sqlite> \
+sqlite> \
+sqlite> /*----------------------------------------------*/\
+sqlite> \
+sqlite> \
+sqlite> /*The data for Mock_Restaurants_Sales database are done.*/\
+sqlite> /*Now, we will see the tables and data in Mock_Restaurants_Sales database.*/\
+sqlite> \
+sqlite> \
+sqlite> /*-------------------------------------------------*/\
+sqlite> \
+sqlite> \
+sqlite> .tables\
+BWL_2018_Sales_Data     BWL_PR_2019_Sales_Data  PL_2019_Sales_Data    \
+BWL_2019_Sales_Data     Items                   PL_PR_2018_Sales_Data \
+BWL_PR_2018_Sales_Data  PL_2018_Sales_Data      PL_PR_2019_Sales_Data \
+sqlite> \
+sqlite> \
+sqlite> SELECT * FROM Items;\
+Abbreviation  Name           Price     \
+------------  -------------  ----------\
+BWL           Bowl           6.8       \
+BWL_PR        Bowl_Premium   8.05      \
+PL            Plate          8.3       \
+PL_PR         Plate_Premium  9.55      \
+sqlite> \
+sqlite> \
+sqlite> SELECT * FROM BWL_2018_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2018          1              BWL         8934          6.8         60751.2       \
+2018          2              BWL         7998          6.8         54386.4       \
+2018          3              BWL         7568          6.8         51462.4       \
+2018          4              BWL         6879          6.8         46777.2       \
+2018          5              BWL         7821          6.8         53182.8       \
+2018          6              BWL         8324          6.8         56603.2       \
+2018          7              BWL         8478          6.8         57650.4       \
+2018          8              BWL         8814          6.8         59935.2       \
+2018          9              BWL         8631          6.8         58690.8       \
+2018          10             BWL         7998          6.8         54386.4       \
+2018          11             BWL         8213          6.8         55848.4       \
+2018          12             BWL         9032          6.8         61417.6       \
+2018          13             BWL         9213          6.8         62648.4       \
+sqlite> \
+sqlite> \
+sqlite> SELECT * FROM BWL_2019_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2019          1              BWL         9724          6.8         66123.2       \
+2019          2              BWL         8132          6.8         55297.6       \
+2019          3              BWL         7981          6.8         54270.8       \
+2019          4              BWL         6894          6.8         46879.2       \
+2019          5              BWL         8345          6.8         56746         \
+2019          6              BWL         8678          6.8         59010.4       \
+2019          7              BWL         8245          6.8         56066         \
+2019          8              BWL         9199          6.8         62553.2       \
+2019          9              BWL         8832          6.8         60057.6       \
+2019          10             BWL         8375          6.8         56950         \
+2019          11             BWL         8627          6.8         58663.6       \
+2019          12             BWL         9450          6.8         64260         \
+2019          13             BWL         9678          6.8         65810.4       \
+sqlite> \
+sqlite> \
+sqlite> SELECT * FROM BWL_PR_2018_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2018          1              BWL_PR      6893          8.05        55488.65      \
+2018          2              BWL_PR      6781          8.05        54587.05      \
+2018          3              BWL_PR      6982          8.05        56205.1       \
+2018          4              BWL_PR      5921          8.05        47664.05      \
+2018          5              BWL_PR      6104          8.05        49137.2       \
+2018          6              BWL_PR      7103          8.05        57179.15      \
+2018          7              BWL_PR      7293          8.05        58708.65      \
+2018          8              BWL_PR      7673          8.05        61767.65      \
+2018          9              BWL_PR      7132          8.05        57412.6       \
+2018          10             BWL_PR      6905          8.05        55585.25      \
+2018          11             BWL_PR      7434          8.05        59842.7       \
+2018          12             BWL_PR      7521          8.05        60544.05      \
+2018          13             BWL_PR      7741          8.05        62315.05      \
+sqlite> \
+sqlite> \
+sqlite> SELECT * FROM BWL_PR_2019_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2019          1              BWL_PR      6231          8.05        50159.55      \
+2019          2              BWL_PR      6309          8.05        50787.45      \
+2019          3              BWL_PR      6631          8.05        53379.55      \
+2019          4              BWL_PR      5692          8.05        45820.6       \
+2019          5              BWL_PR      5870          8.05        47253.5       \
+2019          6              BWL_PR      6721          8.05        54104.05      \
+2019          7              BWL_PR      6892          8.05        55480.6       \
+2019          8              BWL_PR      7011          8.05        56438.55      \
+2019          9              BWL_PR      6521          8.05        52494.05      \
+2019          10             BWL_PR      6090          8.05        49024.5       \
+2019          11             BWL_PR      6821          8.05        54909.05      \
+2019          12             BWL_PR      6831          8.05        54989.55      \
+2019          13             BWL_PR      6902          8.05        55561.1       \
+sqlite> \
+sqlite> \
+sqlite> SELECT * FROM PL_2018_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2018          1              PL          12435         8.3         103210.5      \
+2018          2              PL          11345         8.3         94163.5       \
+2018          3              PL          11750         8.3         97525         \
+2018          4              PL          10993         8.3         91241.9       \
+2018          5              PL          11032         8.3         91565.6       \
+2018          6              PL          11783         8.3         97798.9       \
+2018          7              PL          11236         8.3         93258.8       \
+2018          8              PL          11895         8.3         98728.5       \
+2018          9              PL          11548         8.3         95848.4       \
+2018          10             PL          12032         8.3         99865.6       \
+2018          11             PL          12439         8.3         103243.7      \
+2018          12             PL          12480         8.3         103584        \
+2018          13             PL          12592         8.3         104513.6      \
+sqlite> \
+sqlite> \
+sqlite> SELECT * FROM PL_2019_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2019          1              PL          14092         8.3         116963.6      \
+2019          2              PL          13450         8.3         111635        \
+2019          3              PL          13290         8.3         110307        \
+2019          4              PL          12679         8.3         105235.7      \
+2019          5              PL          12090         8.3         100347        \
+2019          6              PL          12345         8.3         102463.5      \
+2019          7              PL          12654         8.3         105028.2      \
+2019          8              PL          13203         8.3         109584.9      \
+2019          9              PL          13021         8.3         108074.3      \
+2019          10             PL          13780         8.3         114374        \
+2019          11             PL          13989         8.3         116108.7      \
+2019          12             PL          13873         8.3         115145.9      \
+2019          13             PL          14002         8.3         116216.6      \
+sqlite> \
+sqlite> \
+sqlite> SELECT * FROM PL_PR_2018_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2018          1              PL_PR       9832          9.55        93895.6       \
+2018          2              PL_PR       8302          9.55        79284.1       \
+2018          3              PL_PR       8752          9.55        83581.6       \
+2018          4              PL_PR       8369          9.55        79923.95      \
+2018          5              PL_PR       8901          9.55        85004.55      \
+2018          6              PL_PR       9025          9.55        86188.75      \
+2018          7              PL_PR       9130          9.55        87191.5       \
+2018          8              PL_PR       8968          9.55        85644.4       \
+2018          9              PL_PR       9102          9.55        86924.1       \
+2018          10             PL_PR       9542          9.55        91126.1       \
+2018          11             PL_PR       9620          9.55        91871         \
+2018          12             PL_PR       9678          9.55        92424.9       \
+2018          13             PL_PR       10032         9.55        95805.6       \
+sqlite> \
+sqlite> \
+sqlite> SELECT * FROM PL_PR_2019_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2019          1              PL_PR       10126         9.55        96703.3       \
+2019          2              PL_PR       8803          9.55        84068.65      \
+2019          3              PL_PR       8892          9.55        84918.6       \
+2019          4              PL_PR       8679          9.55        82884.45      \
+2019          5              PL_PR       8890          9.55        84899.5       \
+2019          6              PL_PR       8735          9.55        83419.25      \
+2019          7              PL_PR       9342          9.55        89216.1       \
+2019          8              PL_PR       9579          9.55        91479.45      \
+2019          9              PL_PR       9674          9.55        92386.7       \
+2019          10             PL_PR       9879          9.55        94344.45      \
+2019          11             PL_PR       9904          9.55        94583.2       \
+2019          12             PL_PR       9964          9.55        95156.2       \
+2019          13             PL_PR       10245         9.55        97839.75      \
+sqlite> \
+sqlite> \
+sqlite> \
+\
+\
+
+\f1\b \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+
+\f0\b0 \
+sqlite> .open Mock_Restaurants_Sales.db\
+sqlite> .mode columns\
+sqlite> .header on \
+sqlite> .tables\
+BWL_2018_Sales_Data     BWL_PR_2019_Sales_Data  PL_2019_Sales_Data    \
+BWL_2019_Sales_Data     Items                   PL_PR_2018_Sales_Data \
+BWL_PR_2018_Sales_Data  PL_2018_Sales_Data      PL_PR_2019_Sales_Data \
+sqlite> SELECT * FROM Items;\
+Abbreviation  Name        Price     \
+------------  ----------  ----------\
+BWL           Bowl        6.8       \
+BWL_PR        Bowl_Premi  8.05      \
+PL            Plate       8.3       \
+PL_PR         Plate_Prem  9.55      \
+sqlite> .width 12 13\
+sqlite> SELECT * FROM Items;\
+Abbreviation  Name           Price     \
+------------  -------------  ----------\
+BWL           Bowl           6.8       \
+BWL_PR        Bowl_Premium   8.05      \
+PL            Plate          8.3       \
+PL_PR         Plate_Premium  9.55      \
+sqlite> SELECT * FROM BWL_2018_Sales_Data UNION SELECT * FROM BWL_2019_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2018          1              BWL         8934          6.8         60751.2       \
+2018          2              BWL         7998          6.8         54386.4       \
+2018          3              BWL         7568          6.8         51462.4       \
+2018          4              BWL         6879          6.8         46777.2       \
+2018          5              BWL         7821          6.8         53182.8       \
+2018          6              BWL         8324          6.8         56603.2       \
+2018          7              BWL         8478          6.8         57650.4       \
+2018          8              BWL         8814          6.8         59935.2       \
+2018          9              BWL         8631          6.8         58690.8       \
+2018          10             BWL         7998          6.8         54386.4       \
+2018          11             BWL         8213          6.8         55848.4       \
+2018          12             BWL         9032          6.8         61417.6       \
+2018          13             BWL         9213          6.8         62648.4       \
+2019          1              BWL         9724          6.8         66123.2       \
+2019          2              BWL         8132          6.8         55297.6       \
+2019          3              BWL         7981          6.8         54270.8       \
+2019          4              BWL         6894          6.8         46879.2       \
+2019          5              BWL         8345          6.8         56746         \
+2019          6              BWL         8678          6.8         59010.4       \
+2019          7              BWL         8245          6.8         56066         \
+2019          8              BWL         9199          6.8         62553.2       \
+2019          9              BWL         8832          6.8         60057.6       \
+2019          10             BWL         8375          6.8         56950         \
+2019          11             BWL         8627          6.8         58663.6       \
+2019          12             BWL         9450          6.8         64260         \
+2019          13             BWL         9678          6.8         65810.4       \
+sqlite> \
+sqlite> \
+sqlite> /*Lets combine ALL of our tables to only have one df to play around with*/ \
+sqlite> \
+sqlite> \
+sqlite> \
+sqlite> SELECT * FROM BWL_2018_Sales_Data UNION \
+   ...> SELECT * FROM BWL_2019_Sales_Data UNION\
+   ...> SELECT * FROM BWL_PR_2018_Sales_Data UNION\
+   ...> SELECT * FROM BWL_PR_2019_Sales_Data UNION\
+   ...> SELECT * FROM PL_2018_Sales_Data UNION\
+   ...> SELECT * FROM PL_2019_Sales_Data UNION\
+   ...> SELECT * FROM PL_PR_2018_Sales_Data UNION\
+   ...> SELECT * FROM PL_PR_2019_Sales_Data;\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2018          1              BWL         8934          6.8         60751.2       \
+2018          1              BWL_PR      6893          8.05        55488.65      \
+2018          1              PL          12435         8.3         103210.5      \
+2018          1              PL_PR       9832          9.55        93895.6       \
+2018          2              BWL         7998          6.8         54386.4       \
+2018          2              BWL_PR      6781          8.05        54587.05      \
+2018          2              PL          11345         8.3         94163.5       \
+2018          2              PL_PR       8302          9.55        79284.1       \
+2018          3              BWL         7568          6.8         51462.4       \
+2018          3              BWL_PR      6982          8.05        56205.1       \
+2018          3              PL          11750         8.3         97525         \
+2018          3              PL_PR       8752          9.55        83581.6       \
+2018          4              BWL         6879          6.8         46777.2       \
+2018          4              BWL_PR      5921          8.05        47664.05      \
+2018          4              PL          10993         8.3         91241.9       \
+2018          4              PL_PR       8369          9.55        79923.95      \
+2018          5              BWL         7821          6.8         53182.8       \
+2018          5              BWL_PR      6104          8.05        49137.2       \
+2018          5              PL          11032         8.3         91565.6       \
+2018          5              PL_PR       8901          9.55        85004.55      \
+2018          6              BWL         8324          6.8         56603.2       \
+2018          6              BWL_PR      7103          8.05        57179.15      \
+2018          6              PL          11783         8.3         97798.9       \
+2018          6              PL_PR       9025          9.55        86188.75      \
+2018          7              BWL         8478          6.8         57650.4       \
+2018          7              BWL_PR      7293          8.05        58708.65      \
+2018          7              PL          11236         8.3         93258.8       \
+2018          7              PL_PR       9130          9.55        87191.5       \
+2018          8              BWL         8814          6.8         59935.2       \
+2018          8              BWL_PR      7673          8.05        61767.65      \
+2018          8              PL          11895         8.3         98728.5       \
+2018          8              PL_PR       8968          9.55        85644.4       \
+2018          9              BWL         8631          6.8         58690.8       \
+2018          9              BWL_PR      7132          8.05        57412.6       \
+2018          9              PL          11548         8.3         95848.4       \
+2018          9              PL_PR       9102          9.55        86924.1       \
+2018          10             BWL         7998          6.8         54386.4       \
+2018          10             BWL_PR      6905          8.05        55585.25      \
+2018          10             PL          12032         8.3         99865.6       \
+2018          10             PL_PR       9542          9.55        91126.1       \
+2018          11             BWL         8213          6.8         55848.4       \
+2018          11             BWL_PR      7434          8.05        59842.7       \
+2018          11             PL          12439         8.3         103243.7      \
+2018          11             PL_PR       9620          9.55        91871         \
+2018          12             BWL         9032          6.8         61417.6       \
+2018          12             BWL_PR      7521          8.05        60544.05      \
+2018          12             PL          12480         8.3         103584        \
+2018          12             PL_PR       9678          9.55        92424.9       \
+2018          13             BWL         9213          6.8         62648.4       \
+2018          13             BWL_PR      7741          8.05        62315.05      \
+2018          13             PL          12592         8.3         104513.6      \
+2018          13             PL_PR       10032         9.55        95805.6       \
+2019          1              BWL         9724          6.8         66123.2       \
+2019          1              BWL_PR      6231          8.05        50159.55      \
+2019          1              PL          14092         8.3         116963.6      \
+2019          1              PL_PR       10126         9.55        96703.3       \
+2019          2              BWL         8132          6.8         55297.6       \
+2019          2              BWL_PR      6309          8.05        50787.45      \
+2019          2              PL          13450         8.3         111635        \
+2019          2              PL_PR       8803          9.55        84068.65      \
+2019          3              BWL         7981          6.8         54270.8       \
+2019          3              BWL_PR      6631          8.05        53379.55      \
+2019          3              PL          13290         8.3         110307        \
+2019          3              PL_PR       8892          9.55        84918.6       \
+2019          4              BWL         6894          6.8         46879.2       \
+2019          4              BWL_PR      5692          8.05        45820.6       \
+2019          4              PL          12679         8.3         105235.7      \
+2019          4              PL_PR       8679          9.55        82884.45      \
+2019          5              BWL         8345          6.8         56746         \
+2019          5              BWL_PR      5870          8.05        47253.5       \
+2019          5              PL          12090         8.3         100347        \
+2019          5              PL_PR       8890          9.55        84899.5       \
+2019          6              BWL         8678          6.8         59010.4       \
+2019          6              BWL_PR      6721          8.05        54104.05      \
+2019          6              PL          12345         8.3         102463.5      \
+2019          6              PL_PR       8735          9.55        83419.25      \
+2019          7              BWL         8245          6.8         56066         \
+2019          7              BWL_PR      6892          8.05        55480.6       \
+2019          7              PL          12654         8.3         105028.2      \
+2019          7              PL_PR       9342          9.55        89216.1       \
+2019          8              BWL         9199          6.8         62553.2       \
+2019          8              BWL_PR      7011          8.05        56438.55      \
+2019          8              PL          13203         8.3         109584.9      \
+2019          8              PL_PR       9579          9.55        91479.45      \
+2019          9              BWL         8832          6.8         60057.6       \
+2019          9              BWL_PR      6521          8.05        52494.05      \
+2019          9              PL          13021         8.3         108074.3      \
+2019          9              PL_PR       9674          9.55        92386.7       \
+2019          10             BWL         8375          6.8         56950         \
+2019          10             BWL_PR      6090          8.05        49024.5       \
+2019          10             PL          13780         8.3         114374        \
+2019          10             PL_PR       9879          9.55        94344.45      \
+2019          11             BWL         8627          6.8         58663.6       \
+2019          11             BWL_PR      6821          8.05        54909.05      \
+2019          11             PL          13989         8.3         116108.7      \
+2019          11             PL_PR       9904          9.55        94583.2       \
+2019          12             BWL         9450          6.8         64260         \
+2019          12             BWL_PR      6831          8.05        54989.55      \
+2019          12             PL          13873         8.3         115145.9      \
+2019          12             PL_PR       9964          9.55        95156.2       \
+2019          13             BWL         9678          6.8         65810.4       \
+2019          13             BWL_PR      6902          8.05        55561.1       \
+2019          13             PL          14002         8.3         116216.6      \
+2019          13             PL_PR       10245         9.55        97839.75      \
+sqlite> \
+sqlite> \
+sqlite> SELECT * FROM BWL_2018_Sales_Data UNION \
+   ...>    ...> SELECT * FROM BWL_2019_Sales_Data UNION\
+   ...>    ...> SELECT * FROM BWL_PR_2018_Sales_Data UNION\
+   ...>    ...> SELECT * FROM BWL_PR_2019_Sales_Data UNION\
+   ...>    ...> SELECT * FROM PL_2018_Sales_Data UNION\
+   ...>    ...> SELECT * FROM PL_2019_Sales_Data UNION\
+   ...>    ...> SELECT * FROM PL_PR_2018_Sales_Data UNION\
+   ...>    ...> SELECT * FROM PL_PR_2019_Sales_Data \
+   ...> \
+Display all 162 possibilities? (y or n) \
+   ...> GROUP BY "Name";\
+Error: near ".": syntax error\
+sqlite> \
+sqlite> SELECT * FROM BWL_2018_Sales_Data UNION\
+   ...> SELECT * FROM BWL_2019_Sales_Data UNION\
+   ...> SELECT * FROM BWL_PR_2018_Sales_Data UNION\
+   ...> SELECT * FROM BWL_PR_2019_Sales_Data UNION\
+   ...> SELECT * FROM PL_2018_Sales_Data UNION\
+   ...> SELECT * FROM PL_2019_Sales_Data UNION\
+   ...> SELECT * FROM PL_PR_2018_Sales_Data UNION\
+   ...> SELECT * FROM PL_PR_2019_Sales_Data \
+   ...> GROUP BY "Name";\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2018          1              BWL         8934          6.8         60751.2       \
+2018          1              BWL_PR      6893          8.05        55488.65      \
+2018          1              PL          12435         8.3         103210.5      \
+2018          1              PL_PR       9832          9.55        93895.6       \
+2018          2              BWL         7998          6.8         54386.4       \
+2018          2              BWL_PR      6781          8.05        54587.05      \
+2018          2              PL          11345         8.3         94163.5       \
+2018          2              PL_PR       8302          9.55        79284.1       \
+2018          3              BWL         7568          6.8         51462.4       \
+2018          3              BWL_PR      6982          8.05        56205.1       \
+2018          3              PL          11750         8.3         97525         \
+2018          3              PL_PR       8752          9.55        83581.6       \
+2018          4              BWL         6879          6.8         46777.2       \
+2018          4              BWL_PR      5921          8.05        47664.05      \
+2018          4              PL          10993         8.3         91241.9       \
+2018          4              PL_PR       8369          9.55        79923.95      \
+2018          5              BWL         7821          6.8         53182.8       \
+2018          5              BWL_PR      6104          8.05        49137.2       \
+2018          5              PL          11032         8.3         91565.6       \
+2018          5              PL_PR       8901          9.55        85004.55      \
+2018          6              BWL         8324          6.8         56603.2       \
+2018          6              BWL_PR      7103          8.05        57179.15      \
+2018          6              PL          11783         8.3         97798.9       \
+2018          6              PL_PR       9025          9.55        86188.75      \
+2018          7              BWL         8478          6.8         57650.4       \
+2018          7              BWL_PR      7293          8.05        58708.65      \
+2018          7              PL          11236         8.3         93258.8       \
+2018          7              PL_PR       9130          9.55        87191.5       \
+2018          8              BWL         8814          6.8         59935.2       \
+2018          8              BWL_PR      7673          8.05        61767.65      \
+2018          8              PL          11895         8.3         98728.5       \
+2018          8              PL_PR       8968          9.55        85644.4       \
+2018          9              BWL         8631          6.8         58690.8       \
+2018          9              BWL_PR      7132          8.05        57412.6       \
+2018          9              PL          11548         8.3         95848.4       \
+2018          9              PL_PR       9102          9.55        86924.1       \
+2018          10             BWL         7998          6.8         54386.4       \
+2018          10             BWL_PR      6905          8.05        55585.25      \
+2018          10             PL          12032         8.3         99865.6       \
+2018          10             PL_PR       9542          9.55        91126.1       \
+2018          11             BWL         8213          6.8         55848.4       \
+2018          11             BWL_PR      7434          8.05        59842.7       \
+2018          11             PL          12439         8.3         103243.7      \
+2018          11             PL_PR       9620          9.55        91871         \
+2018          12             BWL         9032          6.8         61417.6       \
+2018          12             BWL_PR      7521          8.05        60544.05      \
+2018          12             PL          12480         8.3         103584        \
+2018          12             PL_PR       9678          9.55        92424.9       \
+2018          13             BWL         9213          6.8         62648.4       \
+2018          13             BWL_PR      7741          8.05        62315.05      \
+2018          13             PL          12592         8.3         104513.6      \
+2018          13             PL_PR       10032         9.55        95805.6       \
+2019          1              BWL         9724          6.8         66123.2       \
+2019          1              BWL_PR      6231          8.05        50159.55      \
+2019          1              PL          14092         8.3         116963.6      \
+2019          1              PL_PR       10126         9.55        96703.3       \
+2019          2              BWL         8132          6.8         55297.6       \
+2019          2              BWL_PR      6309          8.05        50787.45      \
+2019          2              PL          13450         8.3         111635        \
+2019          3              BWL         7981          6.8         54270.8       \
+2019          3              BWL_PR      6631          8.05        53379.55      \
+2019          3              PL          13290         8.3         110307        \
+2019          4              BWL         6894          6.8         46879.2       \
+2019          4              BWL_PR      5692          8.05        45820.6       \
+2019          4              PL          12679         8.3         105235.7      \
+2019          5              BWL         8345          6.8         56746         \
+2019          5              BWL_PR      5870          8.05        47253.5       \
+2019          5              PL          12090         8.3         100347        \
+2019          6              BWL         8678          6.8         59010.4       \
+2019          6              BWL_PR      6721          8.05        54104.05      \
+2019          6              PL          12345         8.3         102463.5      \
+2019          7              BWL         8245          6.8         56066         \
+2019          7              BWL_PR      6892          8.05        55480.6       \
+2019          7              PL          12654         8.3         105028.2      \
+2019          8              BWL         9199          6.8         62553.2       \
+2019          8              BWL_PR      7011          8.05        56438.55      \
+2019          8              PL          13203         8.3         109584.9      \
+2019          9              BWL         8832          6.8         60057.6       \
+2019          9              BWL_PR      6521          8.05        52494.05      \
+2019          9              PL          13021         8.3         108074.3      \
+2019          10             BWL         8375          6.8         56950         \
+2019          10             BWL_PR      6090          8.05        49024.5       \
+2019          10             PL          13780         8.3         114374        \
+2019          11             BWL         8627          6.8         58663.6       \
+2019          11             BWL_PR      6821          8.05        54909.05      \
+2019          11             PL          13989         8.3         116108.7      \
+2019          12             BWL         9450          6.8         64260         \
+2019          12             BWL_PR      6831          8.05        54989.55      \
+2019          12             PL          13873         8.3         115145.9      \
+2019          13             BWL         9678          6.8         65810.4       \
+2019          13             BWL_PR      6902          8.05        55561.1       \
+2019          13             PL          14002         8.3         116216.6      \
+sqlite> \
+sqlite> \
+sqlite> SELECT * FROM BWL_2018_Sales_Data UNION\
+   ...> SELECT * FROM BWL_2019_Sales_Data UNION\
+   ...> SELECT * FROM BWL_PR_2018_Sales_Data UNION\
+   ...> SELECT * FROM BWL_PR_2019_Sales_Data UNION\
+   ...> SELECT * FROM PL_2018_Sales_Data UNION\
+   ...> SELECT * FROM PL_2019_Sales_Data UNION\
+   ...> SELECT * FROM PL_PR_2018_Sales_Data UNION\
+   ...> SELECT * FROM PL_PR_2019_Sales_Data ORDER BY "Name";\
+Year          Period         Name        Transactions  Price       Consumer_spend\
+------------  -------------  ----------  ------------  ----------  --------------\
+2018          1              BWL         8934          6.8         60751.2       \
+2018          2              BWL         7998          6.8         54386.4       \
+2018          3              BWL         7568          6.8         51462.4       \
+2018          4              BWL         6879          6.8         46777.2       \
+2018          5              BWL         7821          6.8         53182.8       \
+2018          6              BWL         8324          6.8         56603.2       \
+2018          7              BWL         8478          6.8         57650.4       \
+2018          8              BWL         8814          6.8         59935.2       \
+2018          9              BWL         8631          6.8         58690.8       \
+2018          10             BWL         7998          6.8         54386.4       \
+2018          11             BWL         8213          6.8         55848.4       \
+2018          12             BWL         9032          6.8         61417.6       \
+2018          13             BWL         9213          6.8         62648.4       \
+2019          1              BWL         9724          6.8         66123.2       \
+2019          2              BWL         8132          6.8         55297.6       \
+2019          3              BWL         7981          6.8         54270.8       \
+2019          4              BWL         6894          6.8         46879.2       \
+2019          5              BWL         8345          6.8         56746         \
+2019          6              BWL         8678          6.8         59010.4       \
+2019          7              BWL         8245          6.8         56066         \
+2019          8              BWL         9199          6.8         62553.2       \
+2019          9              BWL         8832          6.8         60057.6       \
+2019          10             BWL         8375          6.8         56950         \
+2019          11             BWL         8627          6.8         58663.6       \
+2019          12             BWL         9450          6.8         64260         \
+2019          13             BWL         9678          6.8         65810.4       \
+2018          1              BWL_PR      6893          8.05        55488.65      \
+2018          2              BWL_PR      6781          8.05        54587.05      \
+2018          3              BWL_PR      6982          8.05        56205.1       \
+2018          4              BWL_PR      5921          8.05        47664.05      \
+2018          5              BWL_PR      6104          8.05        49137.2       \
+2018          6              BWL_PR      7103          8.05        57179.15      \
+2018          7              BWL_PR      7293          8.05        58708.65      \
+2018          8              BWL_PR      7673          8.05        61767.65      \
+2018          9              BWL_PR      7132          8.05        57412.6       \
+2018          10             BWL_PR      6905          8.05        55585.25      \
+2018          11             BWL_PR      7434          8.05        59842.7       \
+2018          12             BWL_PR      7521          8.05        60544.05      \
+2018          13             BWL_PR      7741          8.05        62315.05      \
+2019          1              BWL_PR      6231          8.05        50159.55      \
+2019          2              BWL_PR      6309          8.05        50787.45      \
+2019          3              BWL_PR      6631          8.05        53379.55      \
+2019          4              BWL_PR      5692          8.05        45820.6       \
+2019          5              BWL_PR      5870          8.05        47253.5       \
+2019          6              BWL_PR      6721          8.05        54104.05      \
+2019          7              BWL_PR      6892          8.05        55480.6       \
+2019          8              BWL_PR      7011          8.05        56438.55      \
+2019          9              BWL_PR      6521          8.05        52494.05      \
+2019          10             BWL_PR      6090          8.05        49024.5       \
+2019          11             BWL_PR      6821          8.05        54909.05      \
+2019          12             BWL_PR      6831          8.05        54989.55      \
+2019          13             BWL_PR      6902          8.05        55561.1       \
+2018          1              PL          12435         8.3         103210.5      \
+2018          2              PL          11345         8.3         94163.5       \
+2018          3              PL          11750         8.3         97525         \
+2018          4              PL          10993         8.3         91241.9       \
+2018          5              PL          11032         8.3         91565.6       \
+2018          6              PL          11783         8.3         97798.9       \
+2018          7              PL          11236         8.3         93258.8       \
+2018          8              PL          11895         8.3         98728.5       \
+2018          9              PL          11548         8.3         95848.4       \
+2018          10             PL          12032         8.3         99865.6       \
+2018          11             PL          12439         8.3         103243.7      \
+2018          12             PL          12480         8.3         103584        \
+2018          13             PL          12592         8.3         104513.6      \
+2019          1              PL          14092         8.3         116963.6      \
+2019          2              PL          13450         8.3         111635        \
+2019          3              PL          13290         8.3         110307        \
+2019          4              PL          12679         8.3         105235.7      \
+2019          5              PL          12090         8.3         100347        \
+2019          6              PL          12345         8.3         102463.5      \
+2019          7              PL          12654         8.3         105028.2      \
+2019          8              PL          13203         8.3         109584.9      \
+2019          9              PL          13021         8.3         108074.3      \
+2019          10             PL          13780         8.3         114374        \
+2019          11             PL          13989         8.3         116108.7      \
+2019          12             PL          13873         8.3         115145.9      \
+2019          13             PL          14002         8.3         116216.6      \
+2018          1              PL_PR       9832          9.55        93895.6       \
+2018          2              PL_PR       8302          9.55        79284.1       \
+2018          3              PL_PR       8752          9.55        83581.6       \
+2018          4              PL_PR       8369          9.55        79923.95      \
+2018          5              PL_PR       8901          9.55        85004.55      \
+2018          6              PL_PR       9025          9.55        86188.75      \
+2018          7              PL_PR       9130          9.55        87191.5       \
+2018          8              PL_PR       8968          9.55        85644.4       \
+2018          9              PL_PR       9102          9.55        86924.1       \
+2018          10             PL_PR       9542          9.55        91126.1       \
+2018          11             PL_PR       9620          9.55        91871         \
+2018          12             PL_PR       9678          9.55        92424.9       \
+2018          13             PL_PR       10032         9.55        95805.6       \
+2019          1              PL_PR       10126         9.55        96703.3       \
+2019          2              PL_PR       8803          9.55        84068.65      \
+2019          3              PL_PR       8892          9.55        84918.6       \
+2019          4              PL_PR       8679          9.55        82884.45      \
+2019          5              PL_PR       8890          9.55        84899.5       \
+2019          6              PL_PR       8735          9.55        83419.25      \
+2019          7              PL_PR       9342          9.55        89216.1       \
+2019          8              PL_PR       9579          9.55        91479.45      \
+2019          9              PL_PR       9674          9.55        92386.7       \
+2019          10             PL_PR       9879          9.55        94344.45      \
+2019          11             PL_PR       9904          9.55        94583.2       \
+2019          12             PL_PR       9964          9.55        95156.2       \
+2019          13             PL_PR       10245         9.55        97839.75      \
+sqlite> \
+\
+}
